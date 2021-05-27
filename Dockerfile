@@ -1,13 +1,7 @@
-FROM node:12-alpine
-
+FROM node:12-alpine as production
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 COPY package.json .
-
-RUN npm install
-
+RUN npm install --production
 COPY . . 
-
-ENV NODE_ENV=production
-
-EXPOSE 3001
-
 CMD ['npm','run','start']

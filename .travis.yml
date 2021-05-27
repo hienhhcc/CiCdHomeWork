@@ -1,0 +1,29 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  # install heroku CLI
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+
+script:
+  - npm run test
+  - docker build -t $DOCKER_USERNAME/$HEROKU_APP_NAME -f Dockerfile .
+  - docker tag $DOCKER_USERNAME/$HEROKU_APP_NAME registry.heroku.com/$HEROKU_APP_NAME/web
+
+deploy:
+  provider: script
+  script:
+    # login to docker registries (dockerhub + heroku)
+    # push to dockerhub & heroku
+    # push existing image have built in script to heroku
+    # create new release with that image
+    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+    docker push $DOCKER_USERNAME/$HEROKU_APP_NAME;
+    docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+    heroku container:release web --app $HEROKU_APP_NAME
+  on:
+    branch: main
