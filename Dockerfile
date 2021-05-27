@@ -3,4 +3,4 @@ COPY package*.json ./
 RUN npm install --development
 COPY . . 
 RUN npm run test
-CMD ['npm','run','start']
+CMD ["npm","run","start"]
