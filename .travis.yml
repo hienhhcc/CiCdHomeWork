@@ -11,11 +11,11 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
 
-install:
-  - npm install
+# install:
+#   - npm install
 
 script:
-  - npm run test
+  # - npm run test
   - docker build -t $DOCKER_USERNAME/$HEROKU_APP_NAME -f Dockerfile .
   - docker tag $DOCKER_USERNAME/$HEROKU_APP_NAME registry.heroku.com/$HEROKU_APP_NAME/web
 
@@ -25,7 +25,6 @@ deploy:
     # push to dockerhub & heroku
     # push existing image have built in script to heroku
     # create new release with that image
-
     docker push $DOCKER_USERNAME/$HEROKU_APP_NAME;
     docker push registry.heroku.com/$HEROKU_APP_NAME/web;
     heroku container:release web --app $HEROKU_APP_NAME

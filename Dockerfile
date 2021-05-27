@@ -4,4 +4,5 @@ ENV NODE_ENV=${NODE_ENV}
 COPY package.json .
 RUN npm install --production
 COPY . . 
+RUN npm run test
 CMD ['npm','run','start']
