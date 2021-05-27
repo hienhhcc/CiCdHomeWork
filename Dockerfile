@@ -1,6 +1,4 @@
-FROM node:12-alpine as production
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+FROM node:12-alpine
 COPY package.json .
 RUN npm install --development
 COPY . . 
