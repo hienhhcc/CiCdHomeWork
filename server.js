@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const app = require('./app');
-
+const { socketService } = require('./services');
 const PORT = process.env.PORT;
 
 mongoose.connect(

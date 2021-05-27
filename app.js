@@ -2,19 +2,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoose = require('mongoose');
 const morgan = require('morgan');
 const httpStatus = require('http-status');
 const passport = require('passport');
 
 const { errorConverter, errorHandler } = require('./middlewares/error.mdw');
 const ApiError = require('./utils/ApiError');
-const { User } = require('./models');
-const { socketService, roomService, userService } = require('./services');
+
 require('dotenv').config();
 const app = express();
-
-const PORT = process.env.PORT || 4000;
 
 app.use(bodyParser.json());
 app.use(morgan('dev'));
