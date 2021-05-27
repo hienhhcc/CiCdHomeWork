@@ -22,7 +22,7 @@ describe('GET /hahaha', function () {
     request(app)
       .get('/hahaha')
       .set('Accept', 'application/json')
-      .expect('Content-Type', /text/)
+      .expect('Content-Type', /json/)
       .expect(200, done);
   });
 });
