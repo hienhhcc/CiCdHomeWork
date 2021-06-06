@@ -40,4 +40,10 @@ describe('GET /hello', function() {
     .get('/hello')
     .expect('hi', done);
   });
+
+  it('should save cookies', function(done) {
+    request(app)
+    .get('/hi')
+    .expect('set-cookie', 'ettique=hi; Path=/', done); // should be ettique=hello instead
+  });
 });

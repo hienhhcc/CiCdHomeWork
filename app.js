@@ -39,6 +39,11 @@ app.get('/hello', function(req, res) {
   res.send('hello');
 });
 
+app.get('/hi', function(req, res) {
+  res.cookie('ettique', 'hello'); // set ettique = hello
+  res.send();
+});
+
 require('./middlewares/routes.mdw')(app);
 
 // 404 error for unknown api request
