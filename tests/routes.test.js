@@ -33,3 +33,11 @@ describe('POST /user', function(){
       .end(done);
   });
 });
+
+describe('GET /hello', function() {
+  it('should send hello', function(done) {
+    request(app)
+    .get('/hello')
+    .expect('hi', done);
+  });
+});
