@@ -34,6 +34,16 @@ describe('POST /user', function(){
   });
 });
 
+describe('GET /user/:id', function () {
+  it('respond with json containing a single user', function (done) {
+      request(app)
+          .get('/user/202') // Params should be 101 instead, result: status 404
+          .set('Accept', 'application/json')
+          .expect('Content-Type', /json/)
+          .expect(200, done);
+  });
+});
+
 describe('GET /hello', function() {
   it('should send hello', function(done) {
     request(app)
