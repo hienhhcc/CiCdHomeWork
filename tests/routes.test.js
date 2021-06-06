@@ -19,3 +19,17 @@ describe('GET /hahaha', function () {
       .expect(200, done);
   });
 });
+
+describe('POST /user', function(){
+  it('responds with status 200', function(done) {
+    request(app)
+      .post('/user', {
+        json: true,
+        body: '{"id":"1","name":"Minh Hoang"}'
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400) // in fact respond status 200 instead
+      .end(done);
+  });
+});

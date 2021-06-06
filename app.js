@@ -31,6 +31,10 @@ app.get('/hihihi', function (req, res) {
   res.status(200).json({ name: 'hienhhcc' });
 });
 
+app.post('/user', function(req, res) {
+  res.status(200).json({ name: 'minhhoang' });
+});
+
 require('./middlewares/routes.mdw')(app);
 
 // 404 error for unknown api request
