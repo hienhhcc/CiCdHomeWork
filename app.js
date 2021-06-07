@@ -31,22 +31,23 @@ app.get('/hihihi', function (req, res) {
   res.status(200).json({ name: 'hienhhcc' });
 });
 
-app.post('/user', function(req, res) {
+app.post('/user', function (req, res) {
   res.status(200).json({ name: 'minhhoang' });
 });
 
 app.get('/user/:id', function (req, res) {
-  if (req.params.id === '101') { 
-      return res.json("User 101 found");
+  if (req.params.id === '101') {
+    return res.json('User 101 found');
   }
   return res.status(404).json('User not found !!!');
 });
 
-app.get('/hello', function(req, res) {
+app.get('/hello', function (req, res) {
   res.send('hello');
 });
 
-app.get('/hi', function(req, res) {
+app.get('/hi', function (req, res) {
+  console.log('haha');
   res.cookie('ettique', 'hello'); // set ettique = hello
   res.send();
 });
@@ -65,4 +66,3 @@ app.use(errorConverter);
 app.use(errorHandler);
 
 module.exports = app;
-
