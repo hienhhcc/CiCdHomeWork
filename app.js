@@ -53,10 +53,18 @@ app.get("/hi", function (req, res) {
 });
 
 app.get("/post/:id", function (req, res) {
-  if (req.params.id === "1") {
-    return res.json("This is a post");
+  if (req.params.id == 1) {
+    return res.json({ title: "This is a post" });
   } else {
-    return res.status(406).json({ message: "Id invalid" });
+    return res.status(406).json({ message: "PostId invalid" });
+  }
+});
+
+app.get("/post/:id/comments", function (req, res) {
+  if (req.params.id == 1) {
+    return res.json({ commentId: 1, content: "This is a comment" });
+  } else {
+    return res.status(406).json({ message: "PostId invalid" });
   }
 });
 

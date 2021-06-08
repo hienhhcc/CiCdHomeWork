@@ -63,3 +63,13 @@ describe("GET /post/:id", function () {
       .expect(200, done);
   });
 });
+
+describe("GET /post/:id/comments", function () {
+  it("respond a list comments of a post", function (done) {
+    request(app)
+      .get("/post/2/comments")
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200, done);
+  });
+});
