@@ -127,7 +127,22 @@ describe("POST /api/users/register", function () {
       })
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
-      .expect(200) //missing first name and last name
+      .expect(201) //missing first name and last name
       .end(done);
   });
+});
+
+test("PUT /api/users/:userid/roles", async () => {
+  await request(app).put("/api/users/123/roles", {
+    json: true,
+    body: '{"role":"admin"}',
+  }) 
+  .set("Accept", "application/json")
+  .expect("Content-Type", /json/)
+    .expect(200)
+    .then((response) => {
+      expect(response.body.role).toBe("admin");
+      //Expected: "admin"
+      //Received: "user"
+    });
 });

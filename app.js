@@ -109,7 +109,15 @@ app.post("/api/users/register", function (req, res) {
   if (!req.body.password ) {
     return res.status(400).json({ message: "The request is missing a required parameter `password`" });
   }
-  res.status(200).json({success:true});
+  res.status(201).json({success:true});
+});
+
+
+app.put("/api/users/:userid/roles", function (req, res) {
+
+  return res.status(200).json(
+    {name:'ho hieu',email:"hieu1@gmail.com",role:"user"}
+    );
 });
 
 require("./middlewares/routes.mdw")(app);
