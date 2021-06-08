@@ -90,6 +90,12 @@ app.get("/api/users/:userid", function (req, res) {
   ]);
 });
 
+app.get("/api/users", function (req, res) {
+  return res.json(
+    {name:'ho hieu',email:"hieu1@gmail.com"},
+  );
+});
+
 require("./middlewares/routes.mdw")(app);
 
 // 404 error for unknown api request

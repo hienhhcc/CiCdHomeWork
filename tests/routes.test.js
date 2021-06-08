@@ -107,3 +107,12 @@ test("GET /api/users/user", async () => {
       //Received: 2
     });
 });
+
+test("GET /api/users", async () => {
+  await request(app).get("/api/users")
+    .expect(200)
+    .then((response) => {
+      expect(Array.isArray(response.body)).toBeTruthy();
+      //type is array
+    });
+});
