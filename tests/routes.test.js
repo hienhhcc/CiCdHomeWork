@@ -57,17 +57,27 @@ describe("GET /hello", function () {
 describe("GET /post/:id", function () {
   it("respond a post", function (done) {
     request(app)
-      .get("/post/2")
+      .get("/post/2") // Params 2 => result: status 406
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200, done);
   });
 });
 
+describe("GET /post/:id", function () {
+  it("respond a post", function (done) {
+    request(app)
+      .get("/post/1") // Params 1 => result: status 200
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(406, done);
+  });
+});
+
 describe("GET /post/:id/comments", function () {
   it("respond a list comments of a post", function (done) {
     request(app)
-      .get("/post/2/comments")
+      .get("/post/2/comments") // Params 2 => result: status 406
       .set("Accept", "application/json")
       .expect("Content-Type", /json/)
       .expect(200, done);
