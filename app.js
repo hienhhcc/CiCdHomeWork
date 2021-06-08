@@ -1,62 +1,70 @@
 //3rd party library
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const morgan = require('morgan');
-const httpStatus = require('http-status');
-const passport = require('passport');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const morgan = require("morgan");
+const httpStatus = require("http-status");
+const passport = require("passport");
 
-const { errorConverter, errorHandler } = require('./middlewares/error.mdw');
-const ApiError = require('./utils/ApiError');
+const { errorConverter, errorHandler } = require("./middlewares/error.mdw");
+const ApiError = require("./utils/ApiError");
 
-require('dotenv').config();
+require("dotenv").config();
 const app = express();
 
 app.use(bodyParser.json());
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(cors());
-app.options('*', cors());
+app.options("*", cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req, res) => {
-  res.status(200).json('Hello world');
+app.get("/", (req, res) => {
+  res.status(200).json("Hello world");
 });
 
-app.get('/hahaha', function (req, res) {
-  res.status(200).json({ name: 'john' });
+app.get("/hahaha", function (req, res) {
+  res.status(200).json({ name: "john" });
 });
 
-app.get('/hihihi', function (req, res) {
-  res.status(200).json({ name: 'hienhhcc' });
+app.get("/hihihi", function (req, res) {
+  res.status(200).json({ name: "hienhhcc" });
 });
 
-app.post('/user', function (req, res) {
-  res.status(200).json({ name: 'minhhoang' });
+app.post("/user", function (req, res) {
+  res.status(200).json({ name: "minhhoang" });
 });
 
-app.get('/user/:id', function (req, res) {
-  if (req.params.id === '101') {
-    return res.json('User 101 found');
+app.get("/user/:id", function (req, res) {
+  if (req.params.id === "101") {
+    return res.json("User 101 found");
   }
-  return res.status(404).json('User not found !!!');
+  return res.status(404).json("User not found !!!");
 });
 
-app.get('/hello', function (req, res) {
-  res.send('hello');
+app.get("/hello", function (req, res) {
+  res.send("hello");
 });
 
-app.get('/hi', function (req, res) {
-  console.log('haha');
-  res.cookie('ettique', 'hello'); // set ettique = hello
+app.get("/hi", function (req, res) {
+  console.log("haha");
+  res.cookie("ettique", "hello"); // set ettique = hello
   res.send();
 });
 
-require('./middlewares/routes.mdw')(app);
+app.get("/post/:id", function (req, res) {
+  if (req.params.id === "1") {
+    return res.json("This is a post");
+  } else {
+    return res.status(406).json({ message: "Id invalid" });
+  }
+});
+
+require("./middlewares/routes.mdw")(app);
 
 // 404 error for unknown api request
 app.use((req, res, next) => {
-  next(new ApiError(httpStatus.NOT_FOUND, 'Route not found'));
+  next(new ApiError(httpStatus.NOT_FOUND, "Route not found"));
 });
 
 // convert error to ApiError, if needed
