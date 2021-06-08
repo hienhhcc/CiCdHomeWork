@@ -116,3 +116,18 @@ test("GET /api/users", async () => {
       //type is array
     });
 });
+
+
+describe("POST /api/users/register", function () {
+  it("", function (done) {
+    request(app)
+      .post("/api/users/register", {
+        json: true,
+        body: '{"email":"hieuho@email.com","name":"hieu ho","password":"password"}',
+      })
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200) //missing first name and last name
+      .end(done);
+  });
+});

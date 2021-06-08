@@ -96,6 +96,22 @@ app.get("/api/users", function (req, res) {
   );
 });
 
+app.post("/api/users/register", function (req, res) {
+  if (!req.body.email) {
+    return res.status(400).json({ message: "The request is missing a required parameter `email`" });
+  }
+  if (!req.body.first_name) {
+    return res.status(400).json({ message: "The request is missing a required parameter `first_name`" });
+  }
+  if (!req.body.last_name) {
+    return res.status(400).json({ message: "The request is missing a required parameter `last_name`" });
+  }
+  if (!req.body.password ) {
+    return res.status(400).json({ message: "The request is missing a required parameter `password`" });
+  }
+  res.status(200).json({success:true});
+});
+
 require("./middlewares/routes.mdw")(app);
 
 // 404 error for unknown api request
