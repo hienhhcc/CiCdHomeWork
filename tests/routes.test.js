@@ -83,3 +83,16 @@ describe("GET /post/:id/comments", function () {
       .expect(200, done);
   });
 });
+
+describe("POST /post", function () {
+  it("respond a post", function (done) {
+    request(app)
+      .post("/post", {
+        json: true,
+        body: '{"title":"title"}',
+      }) // missing content
+      .set("Accept", "application/json")
+      .expect("Content-Type", /json/)
+      .expect(200, done);
+  });
+});

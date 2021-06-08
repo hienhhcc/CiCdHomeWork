@@ -68,6 +68,16 @@ app.get("/post/:id/comments", function (req, res) {
   }
 });
 
+app.post("/post", function (req, res) {
+  if (req.body.title == null) {
+    return res.status(400).json({ message: "Required title" });
+  }
+  if (req.body.content == null) {
+    return res.status(400).json({ message: "Required content" });
+  }
+  return res.json({ title: req.body.title, content: req.body.content });
+});
+
 require("./middlewares/routes.mdw")(app);
 
 // 404 error for unknown api request
