@@ -118,19 +118,19 @@ test("GET /api/users", async () => {
 });
 
 
-describe("POST /api/users/register", function () {
-  it("", function (done) {
-    request(app)
-      .post("/api/users/register", {
-        json: true,
-        body: '{"email":"hieuho@email.com","name":"hieu ho","password":"password"}',
-      })
-      .set("Accept", "application/json")
-      .expect("Content-Type", /json/)
-      .expect(201) //missing first name and last name
-      .end(done);
-  });
-});
+    describe("POST /api/users/register", function () {
+      it("", function (done) {
+        request(app)
+          .post("/api/users/register", {
+            json: true,
+            body: '{"email":"hieuho@email.com","name":"hieu ho","password":"password"}',
+          })
+          .set("Accept", "application/json")
+          .expect("Content-Type", /json/)
+          .expect(201) //missing first name and last name
+          .end(done);
+      });
+    });
 
 test("PUT /api/users/:userid/roles", async () => {
   await request(app).put("/api/users/123/roles", {
