@@ -78,6 +78,18 @@ app.post("/post", function (req, res) {
   return res.json({ title: req.body.title, content: req.body.content });
 });
 
+
+app.get("/api/users/:userid", function (req, res) {
+  if (req.params.userid == null) {
+    return res.status(400).json({ message: "Invalid" });
+  }
+  
+  return res.json([
+    {name:'ho hieu',email:"hieu1@gmail.com"},
+    {name:'ho hieu 2',email:"hieu2@gmail.com"},
+  ]);
+});
+
 require("./middlewares/routes.mdw")(app);
 
 // 404 error for unknown api request

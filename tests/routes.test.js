@@ -1,5 +1,6 @@
 const app = require("../app");
 const request = require("supertest");
+const { response } = require("../app");
 
 let server;
 beforeAll(() => {
@@ -16,7 +17,7 @@ describe("GET /hahaha", function () {
       .get("/hahaha")
       .set("Accept", "application/json")
       .expect("Content-Type", /text/)
-      .expect(200, done);
+      .expect(401, done);
   });
 });
 
@@ -95,4 +96,14 @@ describe("POST /post", function () {
       .expect("Content-Type", /json/)
       .expect(200, done);
   });
+});
+
+test("GET /api/users/user", async () => {
+  await request(app).get("/api/users/users")
+    .expect(200)
+    .then((response) => {
+      expect(response.body.length).toEqual(1);
+      //Expected: 1
+      //Received: 2
+    });
 });
